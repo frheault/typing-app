@@ -2,16 +2,16 @@ import { Link, createFileRoute } from "@tanstack/react-router";
 import { z } from "zod";
 import { useSentenceStore } from "../store/sentenceStore";
 import TypingTest from "../components/TypingTest";
-import { shuffleArray } from "../lib/utils";
+// shuffleArray is not strictly needed here anymore if index is passed
 import { ArrowLeft, HomeIcon } from "lucide-react";
 import { useEffect, useState } from "react";
-import { deobfuscateText } from "../lib/obfuscation"; // Import deobfuscation util
+import { deobfuscateText } from "../lib/obfuscation";
 
-// No need to pass all params in URL if loading from localStorage by ID
 const practiceSearchSchema = z.object({
   topic: z.string().optional(),
   eclipsedTime: z.number().optional().catch(60).optional(),
-  savedTextId: z.number().optional(), // Will use this to load all details from localStorage
+  savedTextId: z.number().optional(),
+  sentenceIndex: z.number().optional(), // Added sentenceIndex
 });
 
 export const Route = createFileRoute("/practice")({
@@ -20,22 +20,31 @@ export const Route = createFileRoute("/practice")({
     practiceSearchSchema.parse(search),
 });
 
-// Type for items stored in localStorage
 interface SavedPracticeData {
   id: number;
   label: string;
-  text: string; // Raw text or Base64 string if obfuscated
+  text: string;
   language: "python" | "cpp" | "plaintext";
   isObfuscated: boolean;
-  time?: string; // From previous implementation
+  time?: string;
 }
 
-
 const Practice = () => {
-  const { topic, eclipsedTime, savedTextId } = Route.useSearch();
-  const [practiceItem, setPracticeItem] = useState<Omit<SavedPracticeData, 'isObfuscated' | 'time'> & { text: string } | null>(null); // Text will be deobfuscated
+  const { topic, eclipsedTime, savedTextId, sentenceIndex } = Route.useSearch(); // Get sentenceIndex
+  const [practiceItem, setPracticeItem] = useState<Omit<SavedPracticeData, 'isObfuscated' | 'time'> & { text: string } | null>(null);
+  const [currentSentence, setCurrentSentence] = useState<string>("");
+  const [practiceLanguage, setPracticeLanguage] = useState<"python" | "cpp" | "plaintext">("plaintext");
+
+
+  const allSentencesByTopic = useSentenceStore((state) =>
+    topic ? state.getSentencesByTopic(topic) : []
+  );
 
   useEffect(() => {
+    setPracticeItem(null); // Reset practice item by default
+    setCurrentSentence("");   // Reset current sentence
+    setPracticeLanguage("plaintext");
+
     if (savedTextId) {
       const storedCustomTexts = localStorage.getItem("customTextData");
       if (storedCustomTexts) {
@@ -45,7 +54,7 @@ const Practice = () => {
         if (foundItem) {
           let finalText = foundItem.text;
           if (foundItem.isObfuscated) {
-            finalText = deobfuscateText(foundItem.text);
+            finalText = deobfuscateText(foundItem.text); //
           }
           setPracticeItem({
             id: foundItem.id,
@@ -53,21 +62,26 @@ const Practice = () => {
             text: finalText,
             language: foundItem.language,
           });
-        } else {
-          setPracticeItem(null); // Item not found
+          setCurrentSentence(finalText);
+          setPracticeLanguage(foundItem.language);
         }
       }
-    } else {
-      setPracticeItem(null); // No savedTextId
+    } else if (topic && allSentencesByTopic.length > 0) {
+      if (sentenceIndex !== undefined && sentenceIndex >= 0 && sentenceIndex < allSentencesByTopic.length) {
+        // Use the sentenceIndex passed from App.tsx
+        setCurrentSentence(allSentencesByTopic[sentenceIndex]);
+      } else {
+        // Fallback: if sentenceIndex is not provided or invalid, pick a random one (optional, could also be an error)
+        console.warn("Sentence index not provided or invalid, picking random. Topic:", topic);
+        const randomIndex = Math.floor(Math.random() * allSentencesByTopic.length);
+        setCurrentSentence(allSentencesByTopic[randomIndex]);
+      }
+      setPracticeLanguage("plaintext");
     }
-  }, [savedTextId]);
+    // If no conditions met, currentSentence remains ""
+  }, [savedTextId, topic, sentenceIndex, allSentencesByTopic]);
 
-  const sentences = useSentenceStore((state) =>
-    state.getSentencesByTopic(topic || "")
-  );
-
-  // Loading state for saved text
-  if (savedTextId && !practiceItem) {
+  if (savedTextId && !practiceItem && !currentSentence) {
     return (
       <div className="grid place-items-center p-12">
         <span className="loading loading-lg text-success"></span>
@@ -76,28 +90,16 @@ const Practice = () => {
     );
   }
 
-  // If a practiceItem is loaded (custom text)
-  if (practiceItem) {
+  if (currentSentence) {
     return (
       <TypingTest
-        eclipsedTime={eclipsedTime || Infinity}
-        text={practiceItem.text} // Already deobfuscated
-        language={practiceItem.language}
+        eclipsedTime={eclipsedTime || (practiceItem ? Infinity : 60)}
+        text={currentSentence}
+        language={practiceLanguage}
       />
     );
   }
 
-  // Fallback to topic-based sentences if no savedTextId or practiceItem not found
-  if (topic && sentences.length > 0) {
-    return (
-      <TypingTest
-        eclipsedTime={eclipsedTime || 60}
-        text={shuffleArray([...sentences]).join(" ").slice(0, 500)}
-        language={"plaintext"}
-      />
-    );
-  }
-  
   // Default/Error case: No valid text source found
   return (
     <div className="grid place-items-center p-12">
