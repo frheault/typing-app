@@ -41,7 +41,7 @@ function RouteComponent() {
   } = useForm<FormData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      language: "plaintext",
+      language: "python",
       isObfuscated: false,
       text: "",
       label: "",
@@ -108,11 +108,22 @@ function RouteComponent() {
     const existingData = localStorage.getItem("customTextData");
     const dataArray = existingData ? JSON.parse(existingData) : [];
 
+    let newLabel = data.label;
+    let counter = 1;
+    // Ensure dataArray is actually an array before calling .some
+    if (Array.isArray(dataArray)) {
+      while (dataArray.some((item: { label: string; }) => item.label === newLabel)) {
+        newLabel = `${data.label}_${counter}`;
+        counter++;
+      }
+    }
+    // Now newLabel contains the unique label
+
     // The 'text' field in `data` for obfuscated files is the Base64 string itself.
     // De-obfuscation will happen on the practice page.
     const newData = {
       id: dataArray?.length + 1 + Math.floor(Math.random() * 1000) + new Date().getTime(),
-      label: data.label,
+      label: newLabel, // Use the potentially modified newLabel here
       text: data.text, // Raw text or Base64 string
       language: data.language,
       isObfuscated: data.isObfuscated,
@@ -212,8 +223,8 @@ function RouteComponent() {
         <div>
           <label htmlFor="language" className="label label-text">Langue (pour la coloration syntaxique)</label>
           <select {...register("language")} className="select select-bordered w-full">
-            <option value="plaintext">Texte brut</option>
             <option value="python">Python</option>
+            <option value="plaintext">Texte brut</option>
             <option value="cpp">C++</option>
           </select>
         </div>

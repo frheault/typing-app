@@ -33,7 +33,7 @@ const Practice = () => {
   const { topic, eclipsedTime, savedTextId, sentenceIndex } = Route.useSearch(); // Get sentenceIndex
   const [practiceItem, setPracticeItem] = useState<Omit<SavedPracticeData, 'isObfuscated' | 'time'> & { text: string } | null>(null);
   const [currentSentence, setCurrentSentence] = useState<string>("");
-  const [practiceLanguage, setPracticeLanguage] = useState<"python" | "cpp" | "plaintext">("plaintext");
+  const [practiceLanguage, setPracticeLanguage] = useState<"python" | "cpp" | "plaintext">("python");
 
 
   const allSentencesByTopic = useSentenceStore((state) =>
@@ -43,7 +43,7 @@ const Practice = () => {
   useEffect(() => {
     setPracticeItem(null); // Reset practice item by default
     setCurrentSentence("");   // Reset current sentence
-    setPracticeLanguage("plaintext");
+    setPracticeLanguage("python");
 
     if (savedTextId) {
       const storedCustomTexts = localStorage.getItem("customTextData");
@@ -76,7 +76,7 @@ const Practice = () => {
         const randomIndex = Math.floor(Math.random() * allSentencesByTopic.length);
         setCurrentSentence(allSentencesByTopic[randomIndex]);
       }
-      setPracticeLanguage("plaintext");
+      setPracticeLanguage("python");
     }
     // If no conditions met, currentSentence remains ""
   }, [savedTextId, topic, sentenceIndex, allSentencesByTopic]);

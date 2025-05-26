@@ -3,7 +3,7 @@ import { useSentenceStore } from "./store/sentenceStore";
 import { Link, useNavigate } from "@tanstack/react-router"; // Import useNavigate
 
 export default function App() {
-  const [selectedTopic, setSelectedTopic] = useState('ecology');
+  const [selectedTopic, setSelectedTopic] = useState('computer_science');
   const [eclipsedTime, setEclipsedTime] = useState(60);
   const navigate = useNavigate(); // Hook for navigation
 
