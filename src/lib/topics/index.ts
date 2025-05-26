@@ -1,17 +1,17 @@
-import { biologySentece } from "./biology";
-import { chemistrySentences } from "./chemistry";
+import { biologySentence } from "./biology";
+import { chemistrySentence } from "./chemistry";
 import { engineeringSentence } from "./engineering";
-import { physicsSentences } from "./physics";
-import { computerSciencesSentences } from "./computer_sciences";
+import { physicsSentence } from "./physics";
+import { computerScienceSentence } from "./computer_science";
 import { mathematicsSentence } from "./mathematics";
 import { ecologySentence } from "./ecology";
 
 export const sentences = [
-  ...biologySentece,
-  ...physicsSentences,
-  ...chemistrySentences,
+  ...biologySentence,
+  ...physicsSentence,
+  ...chemistrySentence,
   ...engineeringSentence,
-  ...computerSciencesSentences,
+  ...computerScienceSentence,
   ...mathematicsSentence,
   ...ecologySentence,
 ];

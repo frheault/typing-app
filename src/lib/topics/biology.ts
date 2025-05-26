@@ -1,4 +1,4 @@
-export const biologySentece = [
+export const biologySentence = [
     {
       id: "biology-1",
       text: "Les tardigrades, aussi appelés oursons d'eau, peuvent survivre dans le vide de l'espace.",

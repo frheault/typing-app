@@ -1,4 +1,4 @@
-export const chemistrySentences = [
+export const chemistrySentence = [
     {
       id: "chemistry-1",
       text: "Le seul métal liquide à température ambiante est le mercure, mais le gallium peut fondre dans votre main.",
