@@ -41,7 +41,7 @@ function RouteComponent() {
   } = useForm<FormData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      language: "plaintext",
+      language: "python",
       isObfuscated: false,
       text: "",
       label: "",
@@ -223,8 +223,8 @@ function RouteComponent() {
         <div>
           <label htmlFor="language" className="label label-text">Langue (pour la coloration syntaxique)</label>
           <select {...register("language")} className="select select-bordered w-full">
-            <option value="plaintext">Texte brut</option>
             <option value="python">Python</option>
+            <option value="plaintext">Texte brut</option>
             <option value="cpp">C++</option>
           </select>
         </div>
