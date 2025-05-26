@@ -139,7 +139,7 @@ export default function TypingTest({
             max={eclipsedTime}
           ></progress>
         )}
-        <div className="p-4 border dark:border-gray-700 rounded md:text-lg select-none font-mono" style={{ whiteSpace: "pre-wrap", lineHeight: "1.6" }}>
+        <div data-testid="text-display-area" className="p-4 border dark:border-gray-700 rounded md:text-lg select-none font-mono" style={{ whiteSpace: "pre-wrap", lineHeight: "1.6" }}>
           {lines.map((line, lineIndex) => (
             <div key={lineIndex} className="flex flex-wrap">
               {line.split("").map((char, charIndexInLine) => {
