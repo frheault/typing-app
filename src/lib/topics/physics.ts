@@ -1,4 +1,4 @@
-export const physicsSentence = [
+export const physicsSentences = [
     {
       id: "physics-1",
       text: "Si le Soleil était une boule de bowling, la Terre serait une bille de roulement et Jupiter une balle de golf.",
