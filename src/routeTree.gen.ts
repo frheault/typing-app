@@ -14,7 +14,6 @@ import { Route as rootRoute } from './routes/__root'
 import { Route as SavedTextImport } from './routes/saved-text'
 import { Route as PracticeImport } from './routes/practice'
 import { Route as CustomTextImport } from './routes/custom-text'
-import { Route as AboutImport } from './routes/about'
 import { Route as IndexImport } from './routes/index'
 
 // Create/Update Routes
