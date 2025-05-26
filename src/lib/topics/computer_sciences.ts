@@ -1,92 +1,252 @@
 export const computerScienceSentence = [
-    {
-      id: "computer-science-1",
-      text: "Les bibliothèques Python peuvent simplifier le développement de programmes en fournissant des fonctionnalités préexistantes, comme `numpy` pour les opérations numériques ou `sklearn` pour l'apprentissage automatique.",
-      topic: "computer-science",
-    },
-    {
-      id: "computer-science-2",
-      text: "Les inconvénients de ne pas utiliser de fonctions dans un programme incluent la répétition de code, une maintenance difficile et une moindre lisibilité.",
-      topic: "computer-science",
-    },
-    {
-      id: "computer-science-3",
-      text: "L'importation d'une bibliothèque en Python se fait via le mot-clé `import`, par exemple `import numpy as np`.",
-      topic: "computer-science",
-    },
-    {
-      id: "computer-science-4",
-      text: "Diviser un programme en plusieurs fonctions plus petites est avantageux pour la modularité, la réutilisabilité et la facilité de débogage.",
-      topic: "computer-science",
-    },
-    {
-      id: "computer-science-5",
-      text: "L'analyse de complexité algorithmique évalue la performance d'un algorithme en termes de ressources (temps, espace) en fonction de la taille de l'entrée[cite: 4]. Elle est plus utile que la mesure du temps d'exécution pour comparer des algorithmes indépendamment du matériel[cite: 5].",
-      topic: "computer-science",
-    },
-    {
-      id: "computer-science-6",
-      text: "L'analyse de complexité algorithmique aide à choisir entre différents algorithmes en prédisant leur comportement pour de grandes entrées[cite: 6].",
-      topic: "computer-science",
-    },
-    {
-      id: "computer-science-7",
-      text: "L'encapsulation en programmation orientée objet (POO) regroupe les données et les méthodes qui les manipulent au sein d'une seule unité, cachant les détails internes[cite: 7]. Cela permet de protéger l'intégrité des données.",
-      topic: "computer-science",
-    },
-    {
-      id: "computer-science-8",
-      text: "Les concepts clés de la POO, comme l'encapsulation, l'héritage et le polymorphisme, améliorent la conception de logiciels en favorisant la modularité, la réutilisabilité et la flexibilité[cite: 8].",
-      topic: "computer-science",
-    },
-    {
-      id: "computer-science-9",
-      text: "La lisibilité du code Python est cruciale pour la maintenance, la collaboration et la réduction des erreurs[cite: 57]. De bons noms de variables et des commentaires pertinents, placés uniquement là où la logique est complexe, améliorent considérablement la compréhension d'un programme[cite: 58].",
-      topic: "computer-science",
-    },
-    {
-      id: "computer-science-10",
-      text: "La décomposition d'un problème complexe en sous-problèmes plus simples facilite le développement d'un programme en Python en le rendant plus gérable et en permettant de résoudre chaque partie indépendamment[cite: 59]. Par exemple, pour un jeu vidéo, on peut décomposer le problème en gestion des mouvements, gestion des scores et gestion des niveaux[cite: 60].",
-      topic: "computer-science",
-    },
-    {
-      id: "computer-science-11",
-      text: "La lecture et l'écriture de fichiers sont essentielles pour la persistance des données, permettant aux programmes de sauvegarder des informations ou de les charger pour une utilisation ultérieure[cite: 61].",
-      topic: "computer-science",
-    },
-    {
-      id: "computer-science-12",
-      text: "En Python, l'opérateur `=` est utilisé pour l'affectation de valeurs à une variable, tandis que l'opérateur `==` est utilisé pour comparer si deux valeurs sont égales[cite: 131].",
-      topic: "computer-science",
-    },
-    {
-      id: "computer-science-13",
-      text: "L'indentation en Python est cruciale car elle définit la structure des blocs de code, comme les boucles, les conditions et les fonctions.",
-      topic: "computer-science",
-    },
-    {
-      id: "computer-science-14",
-      text: "Un environnement de développement intégré (IDE) offre des outils facilitant la programmation, comme l'édition de code, le débogage et l'exécution.",
-      topic: "computer-science",
-    },
-    {
-      id: "computer-science-15",
-      text: "Les erreurs de syntaxe empêchent l'exécution du code, tandis que les erreurs à l'exécution surviennent pendant l'exécution et les erreurs de logique produisent des résultats incorrects sans bloquer le programme[cite: 116]. En général, les erreurs de logique sont les plus difficiles à déceler et potentiellement les plus graves[cite: 163].",
-      topic: "computer-science",
-    },
-    {
-      id: "computer-science-16",
-      text: "Exemple de code Python (one-liner) pour trouver le maximum dans une liste: `max_value = max(my_list)`",
-      topic: "computer-science",
-    },
-    {
-      id: "computer-science-17",
-      text: "Exemple de code Python (one-liner) pour filtrer une liste: `even_numbers = [num for num in my_list if num % 2 == 0]`",
-      topic: "computer-science",
-    },
-    {
-      id: "computer-science-18",
-      text: "Exemple de code Python (one-liner) pour créer un dictionnaire à partir de deux listes: `my_dict = dict(zip(keys, values))`",
-      topic: "computer-science",
-    },
+  {
+    id: "computer_sciences-1",
+    text: "Le terme 'bug' informatique a été popularisé après qu'un vrai papillon de nuit (moth) ait causé un problème dans le Mark II Aiken Relay Calculator à Harvard.",
+    topic: "computer_sciences",
+  },
+  {
+    id: "computer_sciences-2",
+    text: "Alan Turing est considéré comme le père de l'informatique théorique et de l'intelligence artificielle.",
+    topic: "computer_sciences",
+  },
+  {
+    id: "computer_sciences-3",
+    text: "Le premier programmeur informatique était une femme, Ada Lovelace, qui a écrit des algorithmes pour la machine analytique de Charles Babbage.",
+    topic: "computer_sciences",
+  },
+  {
+    id: "computer_sciences-4",
+    text: "Python : Inverser une chaîne de caractères : `s = 'Bonjour'; print(s[::-1])` affiche 'ruojnoB'.",
+    topic: "computer_sciences",
+  },
+  {
+    id: "computer_sciences-5",
+    text: "JavaScript : Vérifier si un tableau inclut un élément : `['pomme', 'banane'].includes('pomme'); // true`",
+    topic: "computer_sciences",
+  },
+  {
+    id: "computer_sciences-6",
+    text: "Le premier virus informatique, 'Creeper', a été créé en 1971 et affichait 'I'M THE CREEPER : CATCH ME IF YOU CAN'.",
+    topic: "computer_sciences",
+  },
+  {
+    id: "computer_sciences-7",
+    text: "L'algorithme PageRank de Google a été nommé d'après Larry Page, l'un des cofondateurs de Google.",
+    topic: "computer_sciences",
+  },
+  {
+    id: "computer_sciences-8",
+    text: "Python : Générer une liste des carrés des nombres de 0 à 9 : `carres = [x**2 for x in range(10)]`.",
+    topic: "computer_sciences",
+  },
+  {
+    id: "computer_sciences-9",
+    text: "Le langage binaire, composé de 0 et de 1, est le langage fondamental compris par les ordinateurs.",
+    topic: "computer_sciences",
+  },
+  {
+    id: "computer_sciences-10",
+    text: "SQL : Sélectionner tous les utilisateurs actifs : `SELECT * FROM utilisateurs WHERE actif = TRUE;`",
+    topic: "computer_sciences",
+  },
+  {
+    id: "computer_sciences-11",
+    text: "Le premier disque dur, l'IBM 350, pesait plus d'une tonne et ne pouvait stocker que 5 Mo de données.",
+    topic: "computer_sciences",
+  },
+  {
+    id: "computer_sciences-12",
+    text: "La loi de Moore stipule que le nombre de transistors sur une puce double environ tous les deux ans.",
+    topic: "computer_sciences",
+  },
+  {
+    id: "computer_sciences-13",
+    text: "Python : Somme des éléments d'une liste : `ma_liste = [1, 2, 3, 4]; total = sum(ma_liste)`.",
+    topic: "computer_sciences",
+  },
+  {
+    id: "computer_sciences-14",
+    text: "L'UTF-8 est un encodage de caractères capable de représenter quasiment tous les caractères de toutes les langues du monde.",
+    topic: "computer_sciences",
+  },
+  {
+    id: "computer_sciences-15",
+    text: "JavaScript : Obtenir la date actuelle : `const maintenant = new Date(); console.log(maintenant.toLocaleDateString());`",
+    topic: "computer_sciences",
+  },
+  {
+    id: "computer_sciences-16",
+    text: "Le 'Deep Blue' d'IBM a battu le champion du monde d'échecs Garry Kasparov en 1997.",
+    topic: "computer_sciences",
+  },
+  {
+    id: "computer_sciences-17",
+    text: "La complexité algorithmique en O(n log n) est typique des algorithmes de tri efficaces comme le tri fusion.",
+    topic: "computer_sciences",
+  },
+  {
+    id: "computer_sciences-18",
+    text: "Python : Lire le contenu d'un fichier : `with open('mon_fichier.txt', 'r') as f: contenu = f.read()`.",
+    topic: "computer_sciences",
+  },
+  {
+    id: "computer_sciences-19",
+    text: "Le World Wide Web a été inventé par Tim Berners-Lee au CERN en 1989.",
+    topic: "computer_sciences",
+  },
+  {
+    id: "computer_sciences-20",
+    text: "Bash : Lister les fichiers dans un répertoire : `ls -l`",
+    topic: "computer_sciences",
+  },
+  {
+    id: "computer_sciences-21",
+    text: "Un 'firewall' (pare-feu) protège un réseau informatique en filtrant le trafic entrant et sortant.",
+    topic: "computer_sciences",
+  },
+  {
+    id: "computer_sciences-22",
+    text: "Le concept de 'machine virtuelle' permet d'exécuter plusieurs systèmes d'exploitation sur un seul matériel physique.",
+    topic: "computer_sciences",
+  },
+  {
+    id: "computer_sciences-23",
+    text: "Python : Joindre une liste de chaînes : `mots = ['Bonjour', 'le', 'monde']; phrase = ' '.join(mots)`.",
+    topic: "computer_sciences",
+  },
+  {
+    id: "computer_sciences-24",
+    text: "En cryptographie, le chiffrement asymétrique utilise une paire de clés : une publique et une privée.",
+    topic: "computer_sciences",
+  },
+  {
+    id: "computer_sciences-25",
+    text: "JavaScript : Créer un élément HTML : `const div = document.createElement('div'); div.textContent = 'Salut!';`",
+    topic: "computer_sciences",
+  },
+  {
+    id: "computer_sciences-26",
+    text: "Le premier nom de domaine enregistré était symbolics.com, le 15 mars 1985.",
+    topic: "computer_sciences",
+  },
+  {
+    id: "computer_sciences-27",
+    text: "L'apprentissage automatique (Machine Learning) est un sous-domaine de l'IA où les systèmes apprennent à partir de données.",
+    topic: "computer_sciences",
+  },
+  {
+    id: "computer_sciences-28",
+    text: "Python : Générer un nombre aléatoire entre 1 et 100 : `import random; num = random.randint(1, 100)`.",
+    topic: "computer_sciences",
+  },
+  {
+    id: "computer_sciences-29",
+    text: "Le 'garbage collector' (ramasse-miettes) dans des langages comme Java ou Python gère automatiquement la mémoire.",
+    topic: "computer_sciences",
+  },
+  {
+    id: "computer_sciences-30",
+    text: "HTML : Structure de base d'une page : `<!DOCTYPE html><html><head><title>Titre</title></head><body>Contenu</body></html>`",
+    topic: "computer_sciences",
+  },
+  {
+    id: "computer_sciences-31",
+    text: "La première souris d'ordinateur a été inventée par Douglas Engelbart dans les années 1960 et était en bois.",
+    topic: "computer_sciences",
+  },
+  {
+    id: "computer_sciences-32",
+    text: "Les 'cookies' HTTP sont de petits fichiers stockés par les navigateurs pour mémoriser des informations sur l'utilisateur.",
+    topic: "computer_sciences",
+  },
+  {
+    id: "computer_sciences-33",
+    text: "Python : Définir une fonction simple : `def saluer(nom): return f'Bonjour, {nom}!'`.",
+    topic: "computer_sciences",
+  },
+  {
+    id: "computer_sciences-34",
+    text: "Un 'fork' en développement logiciel est la création d'un projet indépendant à partir d'un code source existant.",
+    topic: "computer_sciences",
+  },
+  {
+    id: "computer_sciences-35",
+    text: "JavaScript : Boucle 'for' pour afficher les nombres de 0 à 4 : `for (let i = 0; i < 5; i++) { console.log(i); }`",
+    topic: "computer_sciences",
+  },
+  {
+    id: "computer_sciences-36",
+    text: "Le système d'exploitation Linux a été initialement créé par Linus Torvalds en 1991.",
+    topic: "computer_sciences",
+  },
+  {
+    id: "computer_sciences-37",
+    text: "Le 'cloud computing' permet d'accéder à des ressources informatiques (stockage, serveurs) via Internet.",
+    topic: "computer_sciences",
+  },
+  {
+    id: "computer_sciences-38",
+    text: "Python : Utiliser un dictionnaire : `personne = {'nom': 'Dupont', 'age': 30}; print(personne['nom'])`.",
+    topic: "computer_sciences",
+  },
+  {
+    id: "computer_sciences-39",
+    text: "L'acronyme 'API' signifie Application Programming Interface, permettant à différents logiciels de communiquer.",
+    topic: "computer_sciences",
+  },
+  {
+    id: "computer_sciences-40",
+    text: "CSS : Changer la couleur du texte d'un paragraphe : `p { color: blue; }`",
+    topic: "computer_sciences",
+  },
+  {
+    id: "computer_sciences-41",
+    text: "Le langage de programmation C a été développé par Dennis Ritchie chez Bell Labs au début des années 1970.",
+    topic: "computer_sciences",
+  },
+  {
+    id: "computer_sciences-42",
+    text: "Un 'hash' cryptographique produit une chaîne de taille fixe unique pour une entrée donnée, essentiel pour vérifier l'intégrité des données.",
+    topic: "computer_sciences",
+  },
+  {
+    id: "computer_sciences-43",
+    text: "Python : Vérifier si une clé existe dans un dictionnaire : `'nom' in personne # True`",
+    topic: "computer_sciences",
+  },
+  {
+    id: "computer_sciences-44",
+    text: "Le test de Turing évalue la capacité d'une machine à exhiber un comportement intelligent indiscernable de celui d'un humain.",
+    topic: "computer_sciences",
+  },
+  {
+    id: "computer_sciences-45",
+    text: "JavaScript : Sélectionner un élément par son ID : `const titre = document.getElementById('monTitre');`",
+    topic: "computer_sciences",
+  },
+  {
+    id: "computer_sciences-46",
+    text: "Le premier e-mail a été envoyé par Ray Tomlinson en 1971. Il a également introduit l'utilisation du symbole '@' dans les adresses e-mail.",
+    topic: "computer_sciences",
+  },
+  {
+    id: "computer_sciences-47",
+    text: "La programmation orientée objet (POO) est un paradigme basé sur le concept d'objets, qui peuvent contenir des données et du code.",
+    topic: "computer_sciences",
+  },
+  {
+    id: "computer_sciences-48",
+    text: "Python : Obtenir la longueur d'une liste ou chaîne : `len(ma_liste)` ou `len(ma_chaine)`.",
+    topic: "computer_sciences",
+  },
+  {
+    id: "computer_sciences-49",
+    text: "Les 'CAPTCHA' sont conçus pour distinguer les humains des robots, l'acronyme signifiant 'Completely Automated Public Turing test to tell Computers and Humans Apart'.",
+    topic: "computer_sciences",
+  },
+  {
+    id: "computer_sciences-50",
+    text: "Git : Initialiser un nouveau dépôt : `git init`",
+    topic: "computer_sciences",
+  },
 ];
