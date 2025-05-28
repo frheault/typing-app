@@ -111,7 +111,7 @@ export default function TypingTest({
 
 
   const handleSubmit = useCallback(() => {
-    if (userInput !== textToPractice) return;
+    if (userInput.length < textToPractice.length) return;
     if (!isStarted && userInput.length === 0) return;
     setIsSubmitted(true);
   }, [isStarted, userInput, textToPractice]);
@@ -213,7 +213,7 @@ export default function TypingTest({
         <button
           onClick={handleSubmit}
           className="btn btn-success mt-2"
-          disabled={userInput !== textToPractice}
+          disabled={userInput.length < textToPractice.length}
         >
           Soumettre / Terminer
         </button>
