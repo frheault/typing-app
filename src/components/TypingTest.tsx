@@ -111,9 +111,10 @@ export default function TypingTest({
 
 
   const handleSubmit = useCallback(() => {
+    if (userInput !== textToPractice) return;
     if (!isStarted && userInput.length === 0) return;
     setIsSubmitted(true);
-  }, [isStarted, userInput]);
+  }, [isStarted, userInput, textToPractice]);
 
   useEffect(() => {
     if (!(eclipsedTime === 0 || eclipsedTime === Infinity) && timer >= eclipsedTime) {
@@ -209,7 +210,11 @@ export default function TypingTest({
           </div>
         </div>
 
-        <button onClick={handleSubmit} className="btn btn-success mt-2">
+        <button
+          onClick={handleSubmit}
+          className="btn btn-success mt-2"
+          disabled={userInput !== textToPractice}
+        >
           Soumettre / Terminer
         </button>
         <button onClick={() => window.location.reload()} className="btn btn-outline btn-accent mt-2">
