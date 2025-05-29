@@ -60,3 +60,47 @@ Please ensure that your code follows the established code style and guidelines. 
 This project is licensed under the MIT License. You are free to use, modify, and distribute the code as per the terms of the license.
 
 Feel free to explore the code, make improvements, and contribute to the Typing Practice App. We appreciate your contributions!
+
+## Testing
+
+This project uses Playwright for end-to-end testing.
+
+### Prerequisites for Testing
+
+Ensure you have already followed the main installation steps and can run the application locally using `pnpm dev`.
+
+### Setting up Playwright
+
+1.  **Install Playwright browsers:**
+    After the initial `pnpm install`, you need to install the browsers Playwright uses:
+    ```bash
+    pnpm playwright install --with-deps
+    ```
+    This command downloads the necessary browser binaries (Chromium, Firefox, WebKit) and their dependencies.
+
+### Running Tests
+
+1.  **Start the development server (if not already running):**
+    In one terminal, run:
+    ```bash
+    pnpm dev
+    ```
+    Playwright is configured to use this server (at `http://localhost:5173`).
+
+2.  **Run the Playwright test suite:**
+    In another terminal, execute the following command:
+    ```bash
+    pnpm test:e2e
+    ```
+    This will run all tests defined in the `tests/` directory.
+
+### Viewing Test Reports
+
+After the tests have finished, an HTML report will be available. You can view it by running:
+
+```bash
+pnpm playwright show-report
+```
+This command will open the report in your web browser, allowing you to see detailed results for each test.
+
+**Note:** End-to-end tests can be resource-intensive and may take some time to complete.
