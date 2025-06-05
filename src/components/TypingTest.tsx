@@ -125,7 +125,7 @@ export default function TypingTest({
 
   if (isSubmitted) {
     // Pass originalText and userInput to the Result component
-    return <Result cpm={cpm} accuracy={accuracy} originalText={textToPractice} userInput={userInput} />;
+    return <Result cpm={cpm} accuracy={accuracy} originalText={textToPractice} userInput={userInput} duration={timer} />;
   }
 
   const lines = textToPractice.split('\n');
