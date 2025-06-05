@@ -4,7 +4,7 @@ import { useSentenceStore } from "../store/sentenceStore";
 import TypingTest from "../components/TypingTest";
 // shuffleArray is not strictly needed here anymore if index is passed
 import { ArrowLeft, HomeIcon } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { deobfuscateText } from "../lib/obfuscation";
 
 const practiceSearchSchema = z.object({
@@ -36,9 +36,19 @@ const Practice = () => {
   const [practiceLanguage, setPracticeLanguage] = useState<"python" | "cpp" | "plaintext">("python");
 
 
-  const allSentencesByTopic = useSentenceStore((state) =>
-    topic ? state.getSentencesByTopic(topic) : []
-  );
+  const getSentencesByTopicFunc = useSentenceStore((state) => state.getSentencesByTopic);
+  // We also need to ensure that useMemo re-calculates if the underlying sentences in the store change.
+  // One way is to also select sentences.length or the sentences array itself if it's stable.
+  // Given the current store, getSentencesByTopicFunc will always use the latest sentences from get().
+  // So, depending on `topic` and `getSentencesByTopicFunc` (which is stable) should be enough.
+  // Let's refine to ensure it correctly reacts to topic changes.
+
+  const allSentencesByTopic = useMemo(() => {
+    if (!topic) {
+      return [];
+    }
+    return getSentencesByTopicFunc(topic);
+  }, [topic, getSentencesByTopicFunc]); // getSentencesByTopicFunc is stable from Zustand
 
   useEffect(() => {
     setPracticeItem(null); // Reset practice item by default
