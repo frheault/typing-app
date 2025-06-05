@@ -40,7 +40,7 @@ export default function TypingTest({
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [textToPractice, setTextToPractice] = useState(text);
 
-  const handleKeyDown = (event: KeyboardEvent) => {
+  const handleKeyDown = useCallback((event: KeyboardEvent) => {
     if (ignoredKeys.includes(event.key) || event.ctrlKey || event.metaKey) {
       return;
     }
@@ -66,7 +66,7 @@ export default function TypingTest({
     } else if (event.key.length === 1) {
       setUserInput((prevKeys) => prevKeys + event.key);
     }
-  };
+  }, [isStarted, setIsStarted, setUserInput]);
 
   useEffect(() => {
     setTextToPractice(text);
