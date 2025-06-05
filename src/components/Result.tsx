@@ -44,33 +44,30 @@ export default function Result({
   const handleDownloadPdf = async () => {
     if (!certificateRef.current || !/^[A-Z]{4}\d{4}$/.test(cipCode)) {
       console.error("Certificate element not found or CIP is invalid.");
+      // It might be good to also provide user feedback here, e.g., an alert.
+      // For now, the console error is the primary feedback as per existing code.
       return;
     }
 
-    // Update certificate content before capturing
-    const certDateElement = certificateRef.current.querySelector("#cert-date-of-completion");
-    if (certDateElement) certDateElement.textContent = displayedTimestamp || new Date().toLocaleString();
+    try {
+      // It's important that certificateRef.current is not null here.
+      // The initial check should suffice, but defensive coding might add another one if needed.
+      // For this task, assume certificateRef.current is valid if we pass the first guard.
+      const canvas = await html2canvas(certificateRef.current!, { scale: 2 }); // Added non-null assertion for certificateRef.current as it's checked above.
+      const imgData = canvas.toDataURL("image/png");
 
-    const certCipElement = certificateRef.current.querySelector("#cert-cip");
-    if (certCipElement) certCipElement.textContent = cipCode;
+      const pdf = new jsPDF({
+        orientation: "portrait",
+        unit: "px",
+        format: [canvas.width, canvas.height],
+      });
 
-    const certDurationElement = certificateRef.current.querySelector("#cert-duration");
-    if (certDurationElement) certDurationElement.textContent = `${duration} seconds`;
-
-    const certErrorsElement = certificateRef.current.querySelector("#cert-errors");
-    if (certErrorsElement) certErrorsElement.textContent = String(totalErrors);
-
-    const canvas = await html2canvas(certificateRef.current, { scale: 2 });
-    const imgData = canvas.toDataURL("image/png");
-
-    const pdf = new jsPDF({
-      orientation: "portrait",
-      unit: "px",
-      format: [canvas.width, canvas.height],
-    });
-
-    pdf.addImage(imgData, "PNG", 0, 0, canvas.width, canvas.height);
-    pdf.save(`TypingCertificate-${cipCode}.pdf`);
+      pdf.addImage(imgData, "PNG", 0, 0, canvas.width, canvas.height);
+      pdf.save(`TypingCertificate-${cipCode}.pdf`);
+    } catch (error) {
+      console.error("Error generating PDF:", error);
+      alert("Failed to generate PDF. Please try again or check the console for more details if the issue persists.");
+    }
   };
 
   useEffect(() => {
