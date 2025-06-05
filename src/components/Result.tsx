@@ -163,7 +163,7 @@ export default function Result({
           <p style={{ color: "#000000", backgroundColor: "transparent", margin: "0 0 10px 0", padding: "0" }}><strong style={{ color: "#000000", backgroundColor: "transparent", fontWeight: "bold" }}>Duration:</strong> <span id="cert-duration" style={{ color: "#000000", backgroundColor: "transparent" }}>{duration} seconds</span></p>
           <p style={{ color: "#000000", backgroundColor: "transparent", margin: "0 0 10px 0", padding: "0" }}><strong style={{ color: "#000000", backgroundColor: "transparent", fontWeight: "bold" }}>Errors:</strong> <span id="cert-errors" style={{ color: "#000000", backgroundColor: "transparent" }}>{totalErrors}</span></p>
           <hr style={{ margin: "20px 0", borderColor: "#CCCCCC", borderStyle: "solid", borderWidth: "1px 0 0 0", backgroundColor: "transparent" }} />
-          <p style={{ fontSize: "14px", wordBreak: "break-all", color: "#000000", backgroundColor: "transparent", margin: "0 0 10px 0", padding: "0" }}>
+          <p style={{ fontSize: "14px", wordBreak: "break-all", overflowWrap: "break-word", maxWidth: "100%", color: "#000000", backgroundColor: "transparent", margin: "0 0 10px 0", padding: "0" }}>
             <strong style={{ color: "#000000", backgroundColor: "transparent", fontWeight: "bold" }}>Test Integrity Hash (SHA-256):</strong> {textHash}
           </p>
         </div>
