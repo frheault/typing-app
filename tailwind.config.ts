@@ -13,5 +13,6 @@ export default {
   plugins: [require("daisyui")],
   daisyui: {
     themes: ["light", "dark"],
+    oklch: false, // This line is added
   },
 };
