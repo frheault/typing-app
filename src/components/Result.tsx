@@ -150,7 +150,7 @@ export default function Result({
             Certificate of Completion
           </h1>
         </div>
-        <div style={{ fontSize: "18px", lineHeight: "1.8" }}>
+        <div style={{ fontSize: "18px", lineHeight: "1.8", color: "#000000" }}>
           <p><strong>Name:</strong> User Name (Placeholder)</p>
           {/* Ensure this element has an ID for direct manipulation if needed */}
           <p><strong>CIP:</strong> <span id="cert-cip">{cipCode}</span></p>
