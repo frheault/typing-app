@@ -8,76 +8,32 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-// Import Routes
+import { Route as rootRouteImport } from './routes/__root'
+import { Route as SavedTextRouteImport } from './routes/saved-text'
+import { Route as PracticeRouteImport } from './routes/practice'
+import { Route as CustomTextRouteImport } from './routes/custom-text'
+import { Route as IndexRouteImport } from './routes/index'
 
-import { Route as rootRoute } from './routes/__root'
-import { Route as SavedTextImport } from './routes/saved-text'
-import { Route as PracticeImport } from './routes/practice'
-import { Route as CustomTextImport } from './routes/custom-text'
-import { Route as IndexImport } from './routes/index'
-
-// Create/Update Routes
-
-const SavedTextRoute = SavedTextImport.update({
+const SavedTextRoute = SavedTextRouteImport.update({
   id: '/saved-text',
   path: '/saved-text',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const PracticeRoute = PracticeImport.update({
+const PracticeRoute = PracticeRouteImport.update({
   id: '/practice',
   path: '/practice',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const CustomTextRoute = CustomTextImport.update({
+const CustomTextRoute = CustomTextRouteImport.update({
   id: '/custom-text',
   path: '/custom-text',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const IndexRoute = IndexImport.update({
+const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-// Populate the FileRoutesByPath interface
-
-declare module '@tanstack/react-router' {
-  interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/custom-text': {
-      id: '/custom-text'
-      path: '/custom-text'
-      fullPath: '/custom-text'
-      preLoaderRoute: typeof CustomTextImport
-      parentRoute: typeof rootRoute
-    }
-    '/practice': {
-      id: '/practice'
-      path: '/practice'
-      fullPath: '/practice'
-      preLoaderRoute: typeof PracticeImport
-      parentRoute: typeof rootRoute
-    }
-    '/saved-text': {
-      id: '/saved-text'
-      path: '/saved-text'
-      fullPath: '/saved-text'
-      preLoaderRoute: typeof SavedTextImport
-      parentRoute: typeof rootRoute
-    }
-  }
-}
-
-// Create and export the route tree
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -85,22 +41,19 @@ export interface FileRoutesByFullPath {
   '/practice': typeof PracticeRoute
   '/saved-text': typeof SavedTextRoute
 }
-
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/custom-text': typeof CustomTextRoute
   '/practice': typeof PracticeRoute
   '/saved-text': typeof SavedTextRoute
 }
-
 export interface FileRoutesById {
-  __root__: typeof rootRoute
+  __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/custom-text': typeof CustomTextRoute
   '/practice': typeof PracticeRoute
   '/saved-text': typeof SavedTextRoute
 }
-
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths: '/' | '/custom-text' | '/practice' | '/saved-text'
@@ -109,12 +62,44 @@ export interface FileRouteTypes {
   id: '__root__' | '/' | '/custom-text' | '/practice' | '/saved-text'
   fileRoutesById: FileRoutesById
 }
-
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CustomTextRoute: typeof CustomTextRoute
   PracticeRoute: typeof PracticeRoute
   SavedTextRoute: typeof SavedTextRoute
+}
+
+declare module '@tanstack/react-router' {
+  interface FileRoutesByPath {
+    '/saved-text': {
+      id: '/saved-text'
+      path: '/saved-text'
+      fullPath: '/saved-text'
+      preLoaderRoute: typeof SavedTextRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/practice': {
+      id: '/practice'
+      path: '/practice'
+      fullPath: '/practice'
+      preLoaderRoute: typeof PracticeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/custom-text': {
+      id: '/custom-text'
+      path: '/custom-text'
+      fullPath: '/custom-text'
+      preLoaderRoute: typeof CustomTextRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+  }
 }
 
 const rootRouteChildren: RootRouteChildren = {
@@ -123,35 +108,6 @@ const rootRouteChildren: RootRouteChildren = {
   PracticeRoute: PracticeRoute,
   SavedTextRoute: SavedTextRoute,
 }
-
-export const routeTree = rootRoute
+export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-/* ROUTE_MANIFEST_START
-{
-  "routes": {
-    "__root__": {
-      "filePath": "__root.tsx",
-      "children": [
-        "/",
-        "/custom-text",
-        "/practice",
-        "/saved-text"
-      ]
-    },
-    "/": {
-      "filePath": "index.tsx"
-    },
-    "/custom-text": {
-      "filePath": "custom-text.tsx"
-    },
-    "/practice": {
-      "filePath": "practice.tsx"
-    },
-    "/saved-text": {
-      "filePath": "saved-text.tsx"
-    }
-  }
-}
-ROUTE_MANIFEST_END */

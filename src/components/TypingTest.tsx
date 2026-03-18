@@ -25,11 +25,11 @@ const getSyntaxClass = (word: string, language?: string): string => {
 
 export default function TypingTest({
   text,
-  eclipsedTime,
+  timeLimit,
   language,
 }: {
   text: string;
-  eclipsedTime: number;
+  timeLimit: number;
   language?: "python" | "cpp" | "plaintext" | string;
 }) {
   const [userInput, setUserInput] = useState("");
@@ -105,7 +105,7 @@ export default function TypingTest({
       const userInputSlice = userInput.slice(0, comparisonLength);
 
       const currentAccuracy = calculateAccuracy(textSlice, userInputSlice);
-      setAccuracy(Number.isFinite(parseInt(currentAccuracy)) ? parseInt(currentAccuracy) : 0);
+      setAccuracy(Number.isFinite(parseFloat(currentAccuracy)) ? parseFloat(currentAccuracy) : 0);
     }
   }, [textToPractice, timer, userInput, isStarted, isSubmitted]);
 
@@ -117,10 +117,10 @@ export default function TypingTest({
   }, [isStarted, userInput, textToPractice]);
 
   useEffect(() => {
-    if (!(eclipsedTime === 0 || eclipsedTime === Infinity) && timer >= eclipsedTime) {
+    if (!(timeLimit === 0 || timeLimit === Infinity) && timer >= timeLimit) {
       if (!isSubmitted) handleSubmit();
     }
-  }, [eclipsedTime, handleSubmit, timer, isSubmitted]);
+  }, [timeLimit, handleSubmit, timer, isSubmitted]);
 
 
   if (isSubmitted) {
@@ -133,11 +133,11 @@ export default function TypingTest({
   return (
     <>
       <section className="p-2 flex flex-col gap-3">
-        {eclipsedTime !== Infinity && eclipsedTime > 0 && (
+        {timeLimit !== Infinity && timeLimit > 0 && (
           <progress
             className="progress progress-success w-full"
             value={timer}
-            max={eclipsedTime}
+            max={timeLimit}
           ></progress>
         )}
         <div className="p-4 border dark:border-gray-700 rounded md:text-lg select-none font-mono" style={{ whiteSpace: "pre-wrap", lineHeight: "1.6" }}>
