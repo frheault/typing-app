@@ -9,7 +9,7 @@ import { deobfuscateText } from "../lib/obfuscation";
 
 const practiceSearchSchema = z.object({
   topic: z.string().optional(),
-  eclipsedTime: z.number().optional().catch(60).optional(),
+  timeLimit: z.number().optional().catch(60).optional(),
   savedTextId: z.number().optional(),
   sentenceIndex: z.number().optional(), // Added sentenceIndex
 });
@@ -30,7 +30,7 @@ interface SavedPracticeData {
 }
 
 const Practice = () => {
-  const { topic, eclipsedTime, savedTextId, sentenceIndex } = Route.useSearch(); // Get sentenceIndex
+  const { topic, timeLimit, savedTextId, sentenceIndex } = Route.useSearch(); // Get sentenceIndex
   const [practiceItem, setPracticeItem] = useState<Omit<SavedPracticeData, 'isObfuscated' | 'time'> & { text: string } | null>(null);
   const [currentSentence, setCurrentSentence] = useState<string>("");
   const [practiceLanguage, setPracticeLanguage] = useState<"python" | "cpp" | "plaintext">("python");
@@ -56,10 +56,17 @@ const Practice = () => {
     setPracticeLanguage("python");
 
     if (savedTextId) {
-      const storedCustomTexts = localStorage.getItem("customTextData");
-      if (storedCustomTexts) {
-        const customTextsArray: SavedPracticeData[] = JSON.parse(storedCustomTexts);
-        const foundItem = customTextsArray.find(item => item.id === savedTextId);
+      let customTextsArray: SavedPracticeData[] = [];
+      try {
+        const storedCustomTexts = localStorage.getItem("customTextData");
+        if (storedCustomTexts) {
+          customTextsArray = JSON.parse(storedCustomTexts);
+        }
+      } catch (e) {
+        console.error("Failed to parse customTextData from localStorage:", e);
+      }
+      
+      const foundItem = customTextsArray.find(item => item.id === savedTextId);
 
         if (foundItem) {
           let finalText = foundItem.text;
@@ -75,7 +82,6 @@ const Practice = () => {
           setCurrentSentence(finalText);
           setPracticeLanguage(foundItem.language);
         }
-      }
     } else if (topic && allSentencesByTopic.length > 0) {
       if (sentenceIndex !== undefined && sentenceIndex >= 0 && sentenceIndex < allSentencesByTopic.length) {
         // Use the sentenceIndex passed from App.tsx
@@ -103,7 +109,7 @@ const Practice = () => {
   if (currentSentence) {
     return (
       <TypingTest
-        eclipsedTime={eclipsedTime || (practiceItem ? Infinity : 60)}
+        timeLimit={timeLimit || (practiceItem ? Infinity : 60)}
         text={currentSentence}
         language={practiceLanguage}
       />

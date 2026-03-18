@@ -4,7 +4,7 @@ import { Link, useNavigate } from "@tanstack/react-router"; // Import useNavigat
 
 export default function App() {
   const [selectedTopic, setSelectedTopic] = useState('computer_science');
-  const [eclipsedTime, setEclipsedTime] = useState(60);
+  const [timeLimit, setTimeLimit] = useState(60);
   const navigate = useNavigate(); // Hook for navigation
 
   const { getAllTopics, getSentencesByTopic } = useSentenceStore(); // Add getSentencesByTopic
@@ -17,9 +17,9 @@ export default function App() {
     setSelectedTopic(value);
   };
 
-  const handleEclipsedChange = (event: ChangeEvent<HTMLSelectElement>) => {
+  const handleTimeLimitChange = (event: ChangeEvent<HTMLSelectElement>) => {
     const value = event.target.value;
-    setEclipsedTime(parseInt(value));
+    setTimeLimit(parseInt(value));
   };
 
   const handleStartPractice = () => {
@@ -35,7 +35,7 @@ export default function App() {
         to: '/practice',
         search: {
           topic: selectedTopic,
-          eclipsedTime: eclipsedTime,
+          timeLimit: timeLimit,
           sentenceIndex: randomIndex, // Pass the chosen index
         },
       });
@@ -47,7 +47,7 @@ export default function App() {
         to: '/practice',
         search: { // Still navigate so user sees the "no sentences found" message on practice page
           topic: selectedTopic,
-          eclipsedTime: eclipsedTime,
+          timeLimit: timeLimit,
         }
       })
     }
@@ -66,7 +66,7 @@ export default function App() {
             ))}
           </select>
 
-          <select value={eclipsedTime} onChange={handleEclipsedChange} className="select select-success w-full">
+          <select value={timeLimit} onChange={handleTimeLimitChange} className="select select-success w-full">
             <option value={60}>60 secondes</option>
             <option value={120}>120 secondes</option>
             <option value={0}>Infini</option>

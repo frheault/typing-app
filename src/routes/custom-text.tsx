@@ -1,8 +1,8 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useForm, Controller } from "react-hook-form"; // Added Controller
+import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState, ChangeEvent, useEffect } from "react";
+import { useState, ChangeEvent } from "react";
 
 // Assuming deobfuscateText is in utils or a new obfuscation.ts
 // For this example, let's assume it's correctly pathed
@@ -22,7 +22,7 @@ export const Route = createFileRoute("/custom-text")({
 
 const formSchema = z.object({
   label: z.string().min(3, "Le libellé doit comporter au moins 3 caractères"),
-  text: z.string().min(10, "Le texte/contenu doit être disponible"),
+  text: z.string().min(10, "Le texte doit contenir au moins 10 caractères pour un entraînement efficace."),
   language: z.enum(["python", "cpp", "plaintext"]),
   isObfuscated: z.boolean().default(false),
   sourceFileName: z.string().optional(),
@@ -34,8 +34,6 @@ function RouteComponent() {
     handleSubmit,
     reset,
     setValue,
-    getValues, // Added getValues
-    control, // Added control for potential future complex inputs
     watch, // Added watch
     formState: { errors },
   } = useForm<FormData>({
@@ -105,26 +103,27 @@ function RouteComponent() {
   };
 
   const onSubmit = (data: FormData) => {
-    const existingData = localStorage.getItem("customTextData");
-    const dataArray = existingData ? JSON.parse(existingData) : [];
+    let dataArray: any[] = [];
+    try {
+      const existingData = localStorage.getItem("customTextData");
+      dataArray = existingData ? JSON.parse(existingData) : [];
+      if (!Array.isArray(dataArray)) dataArray = [];
+    } catch (e) {
+      console.error("Failed to parse customTextData from localStorage:", e);
+      dataArray = [];
+    }
 
     let newLabel = data.label;
     let counter = 1;
-    // Ensure dataArray is actually an array before calling .some
-    if (Array.isArray(dataArray)) {
-      while (dataArray.some((item: { label: string; }) => item.label === newLabel)) {
-        newLabel = `${data.label}_${counter}`;
-        counter++;
-      }
+    while (dataArray.some((item: { label: string; }) => item.label === newLabel)) {
+      newLabel = `${data.label}_${counter}`;
+      counter++;
     }
-    // Now newLabel contains the unique label
 
-    // The 'text' field in `data` for obfuscated files is the Base64 string itself.
-    // De-obfuscation will happen on the practice page.
     const newData = {
-      id: dataArray?.length + 1 + Math.floor(Math.random() * 1000) + new Date().getTime(),
-      label: newLabel, // Use the potentially modified newLabel here
-      text: data.text, // Raw text or Base64 string
+      id: Date.now() + Math.floor(Math.random() * 1000), // Simple but more stable unique ID
+      label: newLabel,
+      text: data.text,
       language: data.language,
       isObfuscated: data.isObfuscated,
       time: new Date().toLocaleString(),
@@ -145,7 +144,8 @@ function RouteComponent() {
     localStorage.setItem("customTextData", JSON.stringify(dataArray));
 
     navigate({
-      to: `/practice?savedTextId=${newData.id}`, // No need to pass all params, practice will load from localStorage
+      to: "/practice",
+      search: { savedTextId: newData.id },
     });
 
     reset();

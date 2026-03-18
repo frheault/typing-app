@@ -35,7 +35,6 @@ export const ignoredKeys = [
   "End",
   "Insert",
   "Delete",
-  "Tab",
   "F1",
   "F2",
   "F3",
